@@ -2,6 +2,8 @@ import React from 'react'
 import { getReadingTime } from '../consts'
 import { ExitIcon, ClockIcon } from '@radix-ui/react-icons'
 
+
+
 interface Props {
     post: {
         url?: string;
@@ -12,6 +14,7 @@ interface Props {
             pubDate: string;
             author: string;
         };
+        rawContent: () => string;
     }
 }
 
@@ -20,7 +23,8 @@ const ListPost = ({ post }: Props) => {
         frontmatter: { heroImage, description, title, pubDate, author },
     } = post;
 
-    const time = 'Unknown'
+    const content = post.rawContent()
+    const time = getReadingTime(content) || 'Unknown'
 
     return (
         <li className='grid box-border my-12 items-center grid-cols-2 gap-4 max-sm:grid-flow-row max-[1200px]:grid-cols-1 max-md:gap-12 font-Montserrat'>
