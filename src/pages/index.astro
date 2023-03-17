@@ -8,11 +8,11 @@ import MastHead from '../components/MastHead.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import ListPost from '../components/ListPosts';
 
-const posts = await Astro.glob('../content/blog/*.md*');
-const orderedPosts = posts.sort((a,b) => {
-  return new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-});
-//console.log(orderedPosts)
+const posts = (await Astro.glob('../content/blog/*.md')).sort(
+  (a: any, b: any) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+)
 ---
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ const orderedPosts = posts.sort((a,b) => {
 			<section>
 				<ul class="grid grid-cols-1 md:grid-flow-row sm:grid-flow-row gap-4">
 							{
-							  posts.map(post => (<ListPost post={post}/>))
+							  posts.map(post => (<ListPost post={post} />))
 							}
 						  </ul>
 			</section>
