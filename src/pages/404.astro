@@ -1,0 +1,38 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Body from '../components/Body.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Content from '../components/Content.astro';
+import MastHead from '../components/MastHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, HOMEPAGE_URL } from '../consts';
+import ListPost from '../components/ListPosts';
+
+const pathname = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={'404'} description={SITE_DESCRIPTION} />
+	</head>
+	<Body>
+		<Header title={SITE_TITLE} />
+		<Content>
+			<section class="flex flex-col max-h-[90vh] h-full absolute items-center justify-center text-4xl gap-4">
+                <p class="mb-8 items-center underline decoration-dashed decoration-cyan-300"><span class="italic font-semibold">'{pathname}'</span> <span class="capitalize">- does not exist</span></p>
+                <div class="flex items-center flex-col my-4 text-8xl capitalize">
+                    <h1>404</h1>
+                    <p>Page not found</p>
+                </div>
+                <div class="inline-flex gap-8 px-4 capitalize">
+                    <a href={HOMEPAGE_URL} class="underline underline-offset-4 decoration-cyan-300">Home</a>
+                    <a href='/blog' class="underline underline-offset-4 decoration-cyan-300">Blog</a>
+                </div>
+			</section>
+		</Content> 
+        <div class="fixed bottom-0">
+		    <Footer />
+        </div>
+	</Body>
+</html>
