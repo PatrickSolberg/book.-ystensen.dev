@@ -1,4 +1,5 @@
 ---
+import Body from '../components/Body.astro';
 import type { MarkdownLayoutProps } from 'astro';
 
 type Props = MarkdownLayoutProps<{
@@ -11,17 +12,19 @@ type Props = MarkdownLayoutProps<{
 // Now, `frontmatter`, `url`, and other Markdown layout properties
 // are accessible with type safety
 const { frontmatter, url } = Astro.props;
+
+console.log()
 ---
 <html>
   <head>
     <link rel="canonical" href={new URL(url, Astro.site).pathname}>
     <title class="text-8xl">{frontmatter.title}</title>
   </head>
-  <body>
-    <h1>{frontmatter.title} by {frontmatter.author}</h1>
+  <Body>
+    {frontmatter.draft ? <p class="text-red-500">This is a draft. Not yet published</p> : null}
     <div class="my-4">
         <slot />
     </div>
     <p>Written on: {frontmatter.date}</p>
-  </body>
+  </Body>
 </html>
