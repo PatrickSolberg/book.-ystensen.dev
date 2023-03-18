@@ -13,6 +13,10 @@ const posts = (await Astro.glob('../content/blog/*.md')).sort(
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
 )
+
+const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
+
+console.log(nonDraftPosts? 'Theres posts' : 'No posts');
 ---
 
 <!DOCTYPE html>
@@ -25,11 +29,10 @@ const posts = (await Astro.glob('../content/blog/*.md')).sort(
 		<MastHead />
 		<Content>
 			<section>
+				
 				<ul class="grid grid-cols-1 md:grid-flow-row sm:grid-flow-row gap-4">
-							{
-							  posts.map(post => (<ListPost post={post} />))
-							}
-						  </ul>
+							{nonDraftPosts.map(post => (<ListPost post={post} />))}
+				</ul>
 			</section>
 		</Content> 
 		<Footer />
